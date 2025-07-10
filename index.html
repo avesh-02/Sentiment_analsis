@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis Tool</h1>
+        <p>Enter a review or social media post to analyze the sentiment.</p>
+
+        <!-- Form to input text -->
+        <form action="/analyze" method="POST">
+            <textarea name="text" rows="6" cols="50" placeholder="Type your text here..."></textarea><br><br>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if sentiment %}
+        <div class="result">
+            <h3>Analysis Result:</h3>
+            <p><strong>Sentiment:</strong> {{ sentiment }}</p>
+            <p><strong>Sentiment Score:</strong> {{ score }}</p>
+            <p><strong>Input Text:</strong></p>
+            <blockquote>{{ text }}</blockquote>
+        </div>
+        {% endif %}
+
+        <!-- Display Sentiment Distribution Bar Chart -->
+        {% if chart_url %}
+        <div class="chart">
+            <h3>Sentiment Distribution</h3>
+            <img src="data:image/png;base64,{{ chart_url }}" alt="Sentiment Distribution Chart" />
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
